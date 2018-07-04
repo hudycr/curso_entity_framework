@@ -1,3 +1,3 @@
 # Curso entity framework & Linq
-Ejercio01
+Ejercicio 01
   Aplicación de registro de juegos de futbol
