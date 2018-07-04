@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Ejercicio01/Codigo/SoccerAppSLN/packages/EntityFramework.6.2.0
+/Ejercicio01/Codigo/SoccerAppSLN/SoccerApp.Client/bin/Debug
+/Ejercicio01/Codigo/SoccerAppSLN/SoccerApp.Client/obj/Debug
+/Ejercicio01/Codigo/SoccerAppSLN/SoccerApp.Domain/obj/Debug
+/Ejercicio01/Codigo/SoccerAppSLN/SoccerApp.Domain/bin/Debug
+/Ejercicio01/Codigo/SoccerAppSLN/SoccerApp.Data/obj/Debug
+/Ejercicio01/Codigo/SoccerAppSLN/SoccerApp.Data/bin/Debug

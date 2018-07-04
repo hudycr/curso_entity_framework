@@ -123,7 +123,7 @@ namespace SoccerApp.Client
                     //consultamos el id del team
                     //int necaxaId = tournament.Teams.FirstOrDefault(t => t.Name.Contains("Necaxa")).TeamId;
                     Team necaxa = tournament.Teams.FirstOrDefault(t => t.Name.Contains("Necaxa"));
-                    int necaxaId = necaxa.TeamId;
+                    //int necaxaId = necaxa.TeamId.Value;
                     //consultamos los jugadores
                     //var plyLts = ctx.Teams.Where(t => t.TeamId == necaxaId).Include(t => t.Players).SelectMany(t => t.Players).ToList();
                     var plyLts = necaxa.Players;
