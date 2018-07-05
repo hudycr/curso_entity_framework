@@ -8,6 +8,11 @@ namespace SoccerApp.Domain
 {
     public class Player
     {
+        public Player()
+        {
+            this.PersonalInfo = new PersonalInfo();
+        }
+
         public int PlayerId { get; set; }
 
         public string Name { get; set; }
@@ -21,5 +26,9 @@ namespace SoccerApp.Domain
         public virtual ICollection<Goal> Goals { get; set; }
 
         public int? TeamId { get; set; }
+
+        public virtual Team Team { get; set; }
+
+        public PersonalInfo PersonalInfo { get; set; }
     }
 }

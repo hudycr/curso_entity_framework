@@ -25,6 +25,8 @@ namespace SoccerApp.Data
         public DbSet<Stadium> Stadiums { get; set; }
         public DbSet<Official> Officials { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Directive> Directives { get; set; }
+        public DbSet<GameScoreView> GameScoreViews { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -60,6 +62,21 @@ namespace SoccerApp.Data
             #region Staff
             modelBuilder.Configurations.Add(new StaffMap());
             #endregion
+
+            modelBuilder.Configurations.Add(new DirectiveMap());
+
+            //quiero mapear las entidades hijas en sus propias tablas
+            modelBuilder.Entity<President>().ToTable("Presidentes");
+            modelBuilder.Entity<Director>().ToTable("Directores");
+            modelBuilder.Entity<Secretary>().ToTable("Secretarios");
+
+            //configuracion sin clase especifica Map
+            //modelBuilder.ComplexType<PersonalInfo>();
+            //con clase map
+            modelBuilder.Configurations.Add(new PersonalInfoMap());
+
+            //map de nuestra vista
+            modelBuilder.Configurations.Add(new GameScoreViewMap());
         }
     }
 }

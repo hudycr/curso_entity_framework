@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{126768
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerApp.Client", "SoccerApp.Client\SoccerApp.Client.csproj", "{F75CB836-040E-4129-8D23-A31106041FDA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{31003E1E-64CF-4979-8231-FB8CFA944C26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerApp.Services", "SoccerApp.Services\SoccerApp.Services.csproj", "{79313A5D-E035-46F4-856B-8DF296AAA141}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,10 @@ Global
 		{F75CB836-040E-4129-8D23-A31106041FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F75CB836-040E-4129-8D23-A31106041FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F75CB836-040E-4129-8D23-A31106041FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79313A5D-E035-46F4-856B-8DF296AAA141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79313A5D-E035-46F4-856B-8DF296AAA141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79313A5D-E035-46F4-856B-8DF296AAA141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79313A5D-E035-46F4-856B-8DF296AAA141}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,5 +49,6 @@ Global
 		{D60FECFE-5ECA-47E8-A077-16991606462D} = {4DD0AAA9-19C4-4EC9-8BBF-5C6F3A001C4A}
 		{B75E6805-494C-4DC2-B8F6-D33EDEC3889F} = {6CC171B1-B5F3-4935-B2AA-691F1E88C3C1}
 		{F75CB836-040E-4129-8D23-A31106041FDA} = {126768CF-99DC-4C12-86AA-2F4E342976AA}
+		{79313A5D-E035-46F4-856B-8DF296AAA141} = {31003E1E-64CF-4979-8231-FB8CFA944C26}
 	EndGlobalSection
 EndGlobal

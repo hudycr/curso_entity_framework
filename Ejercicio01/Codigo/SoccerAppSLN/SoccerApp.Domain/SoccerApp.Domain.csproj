@@ -42,11 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coach.cs" />
+    <Compile Include="Directive.cs" />
+    <Compile Include="Director.cs" />
+    <Compile Include="GameScoreView.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="Medical.cs" />
     <Compile Include="Official.cs" />
+    <Compile Include="PersonalInfo.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="President.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Secretary.cs" />
     <Compile Include="SoccerGame.cs" />
     <Compile Include="Stadium.cs" />
     <Compile Include="Staff.cs" />

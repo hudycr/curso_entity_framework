@@ -49,8 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\DirectiveMap.cs" />
+    <Compile Include="Mapping\GameScoreViewMap.cs" />
     <Compile Include="Mapping\GoalMap.cs" />
     <Compile Include="Mapping\OfficialMap.cs" />
+    <Compile Include="Mapping\PersonalInfoMap.cs" />
     <Compile Include="Mapping\PlayerMap.cs" />
     <Compile Include="Mapping\SoccerGameMap.cs" />
     <Compile Include="Mapping\StadiumMap.cs" />
@@ -64,6 +67,18 @@
     <Compile Include="Migrations\201807041833137_AddFluentApiHerencia.cs" />
     <Compile Include="Migrations\201807041833137_AddFluentApiHerencia.Designer.cs">
       <DependentUpon>201807041833137_AddFluentApiHerencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807051448410_AddDirectivosTPT.cs" />
+    <Compile Include="Migrations\201807051448410_AddDirectivosTPT.Designer.cs">
+      <DependentUpon>201807051448410_AddDirectivosTPT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807051522191_AddComplexTypePersonalInfo.cs" />
+    <Compile Include="Migrations\201807051522191_AddComplexTypePersonalInfo.Designer.cs">
+      <DependentUpon>201807051522191_AddComplexTypePersonalInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807051637458_AddGameScoreView.cs" />
+    <Compile Include="Migrations\201807051637458_AddGameScoreView.Designer.cs">
+      <DependentUpon>201807051637458_AddGameScoreView.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +100,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807041833137_AddFluentApiHerencia.resx">
       <DependentUpon>201807041833137_AddFluentApiHerencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807051448410_AddDirectivosTPT.resx">
+      <DependentUpon>201807051448410_AddDirectivosTPT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807051522191_AddComplexTypePersonalInfo.resx">
+      <DependentUpon>201807051522191_AddComplexTypePersonalInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807051637458_AddGameScoreView.resx">
+      <DependentUpon>201807051637458_AddGameScoreView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

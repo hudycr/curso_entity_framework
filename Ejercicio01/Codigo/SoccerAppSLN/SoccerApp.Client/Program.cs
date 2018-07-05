@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SoccerApp.Data;
 using SoccerApp.Domain;
 using System.Data.Entity;
+using SoccerApp.Services;
 
 namespace SoccerApp.Client
 {
@@ -13,26 +14,113 @@ namespace SoccerApp.Client
     {
         static void Main(string[] args)
         {
-            using (var ctx = new SoccerAppContext())
+            Team t = new Team
             {
-                Team team1 = new Team
+                Active = true,
+                CountryName = "Croacia",
+                Founded = DateTime.Now,
+                Name = "Croacia",
+                TournamentId = 1
+            };
+            List<Player> jugadores = new List<Player>();
+            jugadores.Add(new Player
+            {
+                Active = true, Name = "Player Croacia 10", DateOfBirth = DateTime.Now,
+                Number = 10,
+                PersonalInfo = new PersonalInfo
                 {
-                    Name = "México",
-                    CountryName = "MX",
-                    Founded = DateTime.Now,
-                    Players = new List<Player>()
-                };
+                    Address = "Direccion X",
+                    Height = Convert.ToDecimal("1.70"),// new Decimal(1.70),
+                    Nationality = "Croata",
+                    Photo = "Player01.jpg"
+                }
+            });
 
-                team1.Players.Add(new Player { Name = "Player1", Number = 10 });
-                team1.Players.Add(new Player { Name = "Player2", Number = 7, DateOfBirth = DateTime.Now });
-
-                ctx.Teams.Add(team1);
-                ctx.SaveChanges();
+            t.Players = jugadores;
+            TeamService service = new TeamService();
+            try
+            {
+                service.Insert(t);
+                Console.WriteLine("Registro exitoso");
             }
-
-            Console.ReadKey();
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error {0}", ex.Message);
+            }
+            Console.ReadLine();
         }
 
+        void PruebaTournamentService()
+        {
+            Tournament t = new Tournament
+            {
+                CreationDate = DateTime.Now,
+                Name = "RusíA 2018"
+            };
+
+            TournamentService service = new TournamentService();
+            try
+            {
+                service.Insert(t);
+                Console.WriteLine("Registro exitoso");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error {0}", ex.Message);
+            }
+            Console.ReadLine();
+        }
+
+        void PruebaVista()
+        {
+            #region insertar equipo
+            using (var ctx = new SoccerAppContext())
+            {
+                Team alemania = new Team
+                {
+                    Active = true,
+                    CountryName = "Alemania",
+                    Founded = DateTime.Now,
+                    Name = "Alemania",
+                    /*Stadium = new Stadium
+                    {
+                        CorporateNaming = "Olimpico Berlín",
+                        Name = "Olimpico Berlín",
+                        Country = "Alemania"
+                    },*/
+                    TournamentId = 1,
+                    Players = new List<Player>
+                    {
+                        new Player { Name ="Toni Kross", Active = true, DateOfBirth = DateTime.Now, Number = 10 },
+                        new Player { Name ="Thomas Muller", Active = true, DateOfBirth = DateTime.Now, Number = 7 },
+                        new Player { Name ="Ozil", Active = true, DateOfBirth = DateTime.Now, Number = 13 }
+                    }
+                };
+                try
+                {
+                    ctx.Teams.Add(alemania);
+                    //ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+            #endregion
+
+            using (var ctx = new SoccerAppContext())
+            {
+                var marcadores = ctx.GameScoreViews;
+
+                foreach (var m in marcadores)
+                {
+                    Console.WriteLine("{0} {1}  - {2} {3}",
+                        m.LocalTeam, m.LocalScore, m.VisitScore, m.VisitTeam);
+                }
+            }
+            Console.ReadKey();
+        }
         void pruebaAnotaciones()
         {
             using (var ctx = new SoccerAppContext())

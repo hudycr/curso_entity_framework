@@ -25,6 +25,8 @@ namespace SoccerApp.Data.Mapping
                 .WithRequired(g => g.Scorer)
                 .HasForeignKey(g => g.ScorerId);
             #endregion
+
+
         }
     }
 }

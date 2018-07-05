@@ -34,7 +34,7 @@ namespace SoccerApp.Data.Mapping
             #endregion
 
             #region map Team one-to-many Player solo con propiedad FK
-            HasMany(t => t.Players).WithRequired().HasForeignKey(p => p.TeamId);
+            HasMany(t => t.Players).WithRequired(p => p.Team).HasForeignKey(p => p.TeamId);
             #endregion
         }
     }
