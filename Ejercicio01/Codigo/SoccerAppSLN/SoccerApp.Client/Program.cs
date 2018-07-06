@@ -14,56 +14,205 @@ namespace SoccerApp.Client
     {
         static void Main(string[] args)
         {
+            //iniciar datos de team
             Team t = new Team
             {
                 Active = true,
-                CountryName = "Croacia",
+                CountryName = "Belgica",
                 Founded = DateTime.Now,
-                Name = "Croacia",
+                Name = "Belgica",
                 TournamentId = 1
             };
             List<Player> jugadores = new List<Player>();
             jugadores.Add(new Player
             {
-                Active = true, Name = "Player Croacia 10", DateOfBirth = DateTime.Now,
+                Active = true,
+                Name = "Player Belgica 10",
+                DateOfBirth = DateTime.Now,
                 Number = 10,
                 PersonalInfo = new PersonalInfo
                 {
                     Address = "Direccion X",
                     Height = Convert.ToDecimal("1.70"),// new Decimal(1.70),
-                    Nationality = "Croata",
+                    Nationality = "Belgica",
                     Photo = "Player01.jpg"
                 }
             });
 
             t.Players = jugadores;
-            TeamService service = new TeamService();
-            StaffService staffService = new StaffService();
-            try
+            //iniciar datos staff
+            Staff medico = new Medical
             {
-                Coach entrenador = new Coach
+                Name = "Preparador Físico Francia",
+                Speciality = "Fisica",
+                PersonalInfo = new PersonalInfo { Address = "Direccion 01" }
+            };
+
+            using (var ctx = new SoccerAppContext())
+            {
+                using (var transaction = ctx.Database.BeginTransaction())
                 {
-                    Active = true,
-                    CountryName = "MX",
-                    DebutDate = DateTime.Now,
-                    EndDate = DateTime.Now,
-                    Name = "Entrenador " + t.Name,
-                    StartDate = DateTime.Now
-                };
+                    //instruccion para que escriba en consola los comandos SQL
+                    ctx.Database.Log = Console.Write;
 
-                Console.WriteLine("Registro exitoso");
+                    try
+                    {
+                        TeamService teamService = new TeamService(ctx);
+                        StaffService staffService = new StaffService(ctx);
 
-                staffService.Insert(entrenador);
-                service.Insert(t);
-                Console.WriteLine("Registro exitoso");
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("Error {0}", ex.Message);
+                        //crear equipo
+                        Console.WriteLine("Crear equipo --------------------------------");
+                        teamService.Insert(t);
+                        Console.WriteLine("Registro de equipo exitoso");
+
+                        //crear staff
+                        Console.WriteLine("Crear staff --------------------------------");
+                        staffService.Insert(medico);
+                        Console.WriteLine("Registro de equipo exitoso");
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine("Error {0}", ex);
+                    }
+                }
             }
             Console.ReadLine();
         }
 
+        void PruebaConsulta()
+        {
+            using (var ctx = new SoccerAppContext())
+            {
+                //instruccion para que escriba en consola los comandos SQL
+                ctx.Database.Log = Console.Write;
+
+                Tournament t = new Tournament
+                {
+                    TournamentId = 1,
+                    Name = "Rusia 2018"
+                };
+                try
+                {
+                    TournamentService service = new TournamentService(ctx);
+                    //consultar por identificador de torneo
+                    var estadios = service.GetStadiumByTournamentName(t);
+
+                    foreach (var estadio in estadios)
+                    {
+                        Console.WriteLine("Equipo: {0} - Estadio: {1}", estadio.Name, estadio.Team.Name);
+                    }
+                    //consultar por nombre de torneo
+                    estadios = service.GetStadiumByTournamentId(t);
+                    foreach (var estadio in estadios)
+                    {
+                        Console.WriteLine("Equipo: {0} - Estadio: {1}", estadio.Name, estadio.Team.Name);
+                    }
+
+                    var estadiosConJuegos = service.GetStadiumSoccerGameByTournamentId(t);
+
+                    foreach (var estadio in estadiosConJuegos)
+                    {
+                        Console.WriteLine("Equipo: {0} - Estadio: {1}", estadio.Name, estadio.Team.Name);
+                    }
+
+                    Console.WriteLine(" ");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error {0}", ex);
+                }
+            }
+            Console.ReadLine();
+        }
+
+        void PruebaStaffs()
+        {
+            Staff coach = new Coach
+            {
+                Name = "Entrenador Francia",
+                Active = true,
+                CountryName = "Francia",
+                DebutDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                StartDate = DateTime.Now,
+                PersonalInfo = new PersonalInfo
+                {
+                    Address = "Direccion"
+                }
+            };
+
+            Staff medico = new Medical
+            {
+                Name = "Nutriologo Francia",
+                Speciality = "Nutrición",
+                PersonalInfo = new PersonalInfo { Address = "Direccion 01" }
+            };
+            using (var ctx = new SoccerAppContext())
+            {
+                //instruccion para que escriba en consola los comandos SQL
+                ctx.Database.Log = Console.Write;
+
+                try
+                {
+                    StaffService service = new StaffService(ctx);
+                    service.Insert(medico);
+                    Console.WriteLine("Registro exitoso");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error {0}", ex);
+                }
+            }
+            Console.ReadLine();
+        }
+        void PruebaDirectivos()
+        {
+            Directive presidente = new President
+            {
+                Name = "Presidente FIFA",
+                Departament = "FIFA",
+                Email = "presidente@email.com",
+                Subordinates = new List<Directive>()
+            };
+
+            Directive director = new Director
+            {
+                Name = "Director FIFA",
+                Departament = "FIFA",
+                Phone = "9999 123456",
+                Subordinates = new List<Directive>()
+            };
+
+            presidente.Subordinates.Add(director);
+
+            Directive secretario = new Secretary
+            {
+                Name = "Secretario FIFA",
+                Departament = "FIFA",
+                Fax = "NA"
+            };
+            director.Subordinates.Add(secretario);
+
+            using (var ctx = new SoccerAppContext())
+            {
+                //instruccion para que escriba en consola los comandos SQL
+                ctx.Database.Log = Console.Write;
+
+                try
+                {
+                    DirectiveService service = new DirectiveService(ctx);
+                    service.Insert(presidente);
+                    Console.WriteLine("Registro exitoso");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error {0}", ex);
+                }
+            }
+            Console.ReadLine();
+        }
         void PruebaTeamService()
         {
             Team t = new Team
@@ -91,7 +240,7 @@ namespace SoccerApp.Client
             });
 
             t.Players = jugadores;
-            TeamService service = new TeamService();
+            TeamService service = new TeamService(null);
             try
             {
                 service.Insert(t);
@@ -103,6 +252,7 @@ namespace SoccerApp.Client
             }
             Console.ReadLine();
         }
+
         void PruebaTournamentService()
         {
             Tournament t = new Tournament
@@ -111,7 +261,7 @@ namespace SoccerApp.Client
                 Name = "RusíA 2018"
             };
 
-            TournamentService service = new TournamentService();
+            TournamentService service = new TournamentService(null);
             try
             {
                 service.Insert(t);

@@ -18,6 +18,6 @@ namespace SoccerApp.Domain
 
         public int? TeamId { get; set; }
 
-        public Team Team { get; set; }
+        public virtual Team Team { get; set; }
     }
 }

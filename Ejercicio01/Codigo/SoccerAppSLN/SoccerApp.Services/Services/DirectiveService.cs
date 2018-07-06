@@ -8,27 +8,25 @@ using System.Threading.Tasks;
 
 namespace SoccerApp.Services
 {
-    public class StaffService
+    public class DirectiveService
     {
         private SoccerAppContext ctx;
 
-        public StaffService(SoccerAppContext context)
+        public DirectiveService(SoccerAppContext context)
         {
             this.ctx = context ?? new SoccerAppContext();
         }
 
-        public void Insert(Staff staff)
+        public void Insert(Directive directive)
         {
             #region validaciones
-            var staffRepetidos = from s in ctx.Staffs
-                                where s.Name == staff.Name
-                                select s;
-
-            if (staffRepetidos.Count() > 0)
-                throw new Exception("El nombre del staff ya existe");
+            var directivoRepetido = ctx.Directives
+                .FirstOrDefault(i => i.Name == directive.Name);
+            if (directivoRepetido != null)
+                throw new Exception("El nombre del directivo está repetido");
             #endregion
 
-            ctx.Staffs.Add(staff);
+            ctx.Directives.Add(directive);
             ctx.SaveChanges();
         }
     }
