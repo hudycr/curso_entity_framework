@@ -38,8 +38,22 @@ namespace SoccerApp.Client
 
             t.Players = jugadores;
             TeamService service = new TeamService();
+            StaffService staffService = new StaffService();
             try
             {
+                Coach entrenador = new Coach
+                {
+                    Active = true,
+                    CountryName = "MX",
+                    DebutDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    Name = "Entrenador " + t.Name,
+                    StartDate = DateTime.Now
+                };
+
+                Console.WriteLine("Registro exitoso");
+
+                staffService.Insert(entrenador);
                 service.Insert(t);
                 Console.WriteLine("Registro exitoso");
             }
@@ -50,6 +64,45 @@ namespace SoccerApp.Client
             Console.ReadLine();
         }
 
+        void PruebaTeamService()
+        {
+            Team t = new Team
+            {
+                Active = true,
+                CountryName = "Croacia",
+                Founded = DateTime.Now,
+                Name = "Croacia",
+                TournamentId = 1
+            };
+            List<Player> jugadores = new List<Player>();
+            jugadores.Add(new Player
+            {
+                Active = true,
+                Name = "Player Croacia 10",
+                DateOfBirth = DateTime.Now,
+                Number = 10,
+                PersonalInfo = new PersonalInfo
+                {
+                    Address = "Direccion X",
+                    Height = Convert.ToDecimal("1.70"),// new Decimal(1.70),
+                    Nationality = "Croata",
+                    Photo = "Player01.jpg"
+                }
+            });
+
+            t.Players = jugadores;
+            TeamService service = new TeamService();
+            try
+            {
+                service.Insert(t);
+                Console.WriteLine("Registro exitoso");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error {0}", ex.Message);
+            }
+            Console.ReadLine();
+        }
         void PruebaTournamentService()
         {
             Tournament t = new Tournament

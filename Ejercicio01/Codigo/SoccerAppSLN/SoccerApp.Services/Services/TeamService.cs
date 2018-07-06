@@ -26,7 +26,7 @@ namespace SoccerApp.Services
                     throw new ArgumentException("La lista de jugadores no puede estar vacia");
                 //nombre no repetido en el mismo torneo
                 var equipoRepetido = ctx.Teams
-                    .FirstOrDefault(t => t.Name.CompareTo(team.Name) == 0
+                    .FirstOrDefault(t => t.Name == team.Name
                         && t.TournamentId == team.TournamentId);
                 if (equipoRepetido != null)
                     throw new ArgumentException("El nombre del equipo ya existe");
